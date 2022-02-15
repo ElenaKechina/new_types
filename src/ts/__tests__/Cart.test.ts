@@ -1,5 +1,7 @@
-import Cart from '../cart';
-import Movie from '../movie';
+import Book from '../domain/Book';
+import Movie from '../domain/Films';
+import MusicAlbum from '../domain/MusicAlbum';
+import Cart from '../service/cart';
 
 test('new card should be empty', () => {
   const cart = new Cart();
@@ -10,16 +12,22 @@ test('new card should be empty', () => {
 test('card should return items', () => {
   const cart = new Cart();
 
-  const avengers = new Movie({
-    country: 'USA',
-    genre: ['фантастика', 'боевик', 'фэнтези', 'приключения'],
-    localizedName: 'Мстители',
-    name: 'The Avengers',
-    time: '137 мин./02:17',
-    year: 2012,
-  });
+  const book = new Book(1001, 'War and Piece', 'Leo Tolstoy', 2000, 1225);
+  const musicAlbum = new MusicAlbum(1008, 'Meteora', 'Linkin Park', 900);
+  const movie = new Movie(
+    128,
+    'Avergens',
+    700,
+    'Мстители',
+    2012,
+    'USA',
+    ['фантастика', 'боевик', 'фэнтези', 'приключения'],
+    '137 мин./02:17'
+  );
 
-  cart.add(avengers);
+  cart.add(book);
+  cart.add(musicAlbum);
+  cart.add(movie);
 
-  expect(cart.items).toEqual([avengers]);
+  expect(cart.items).toEqual([book, musicAlbum, movie]);
 });
